@@ -3,37 +3,226 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kiray Bet Mini App</title>
+  <title>KirayBet - የአከራይ ምዝገባ</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
-    body { font-family: sans-serif; background: #f4f6f8; margin: 0; padding: 15px; }
-    .card { background: white; border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-    .wallet-grid { display: flex; gap: 10px; margin-bottom: 15px; }
-    .btn-wallet { flex: 1; padding: 15px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; }
-    .btn-recharge { background: #ffebee; color: #c62828; }
-    .btn-withdraw { background: #e8f5e9; color: #2e7d32; }
-    .house-item { border-bottom: 1px solid #eee; padding: 10px 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7f6;
+      margin: 0;
+      padding: 15px;
+      color: #333;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2, h3 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+    .btn {
+      width: 100%;
+      background-color: #0088cc;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .btn:hover {
+      background-color: #006699;
+    }
+    .hidden {
+      display: none;
+    }
+    .agent-section {
+      background: #eef7fc;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 5px solid #0088cc;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
-  <div class="wallet-grid">
-    <button class="btn-wallet btn-recharge">📥 Recharge</button>
-    <button class="btn-wallet btn-withdraw">📤 Withdraw</button>
-  </div>
-  <div id="role-view" class="card">
-    <h3>የቤቶች ዝርዝር</h3>
-    <div class="house-item">
-      <strong>አዲስ አበባ | አራዳ ክፍለ ከተማ</strong><br>
-      ዋጋ፡ 15,000 ብር/ወር | 2 ክፍል
+
+<div class="container">
+  <h2>የአከራይ ምዝገባ ቅፅ</h2>
+
+  <!-- Step 1: User Profile & Fayda Registration -->
+  <form id="landlordForm">
+    <div class="form-group">
+      <label>ሙሉ ስም</label>
+      <input type="text" id="fullName" placeholder="የአከራዩ ሙሉ ስም" required>
     </div>
-    <div class="house-item">
-      <strong>አዲስ አበባ | ቦሌ ክፍለ ከተማ</strong><br>
-      ዋጋ፡ 35,000 ብር/ወር | 3 ክፍል
+
+    <div class="form-group">
+      <label>ከተማ</label>
+      <input type="text" id="city" value="አዲስ አበባ" readonly style="background-color: #e9ecef;">
     </div>
-  </div>
-  <script>
-    const tg = window.Telegram.WebApp;
-    tg.expand();
-  </script>
+
+    <div class="form-group">
+      <label>ክፍለ ከተማ</label>
+      <select id="subcity" required>
+        <option value="">ክፍለ ከተማ ይምረጡ</option>
+        <option value="አራዳ">አራዳ</option>
+        <option value="አዲስ ከተማ">አዲስ ከተማ</option>
+        <option value="ቦሌ">ቦሌ</option>
+        <option value="ጉለሌ">ጉለሌ</option>
+        <option value="ክፍለ ከተማ">ከረከስ</option>
+        <option value="ልደታ">ልደታ</option>
+        <option value="መካከለኛ">ንፋስ ስልክ ላፍቶ</option>
+        <option value="ኮልፌ ቀራኒዮ">ኮልፌ ቀራኒዮ</option>
+        <option value="የካ">የካ</option>
+        <option value="አካቂ ቃሊቲ">አካቂ ቃሊቲ</option>
+        <option value="ላሚ ኩራ">ላሚ ኩራ</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>ወረዳ</label>
+      <input type="text" id="woreda" placeholder="ወረዳ (ምሳሌ፡ 03)" required>
+    </div>
+
+    <div class="form-group">
+      <label>መገኛ ልዩ ቦታ</label>
+      <input type="text" id="location" placeholder="ምሳሌ፡ ከካፌው ጀርባ" required>
+    </div>
+
+    <div class="form-group">
+      <label>ስልክ ቁጥር</label>
+      <input type="tel" id="phone" placeholder="09........" required>
+    </div>
+
+    <div class="form-group">
+      <label>ፋይዳ መታወቂያ (FAN No.)</label>
+      <input type="text" id="faydaNo" placeholder="የፋይዳ/FAN ቁጥር ያስገቡ" required>
+    </div>
+
+    <button type="button" class="btn" onclick="sendOTP()">OTP ላክ</button>
+
+    <!-- OTP & ID Photo Section (Hidden initially) -->
+    <div id="otpSection" class="hidden">
+      <hr style="margin: 20px 0;">
+      <div class="form-group">
+        <label>የOTP ማስገቢያ</label>
+        <input type="text" id="otpInput" placeholder="ወደ ስልክዎ የተላከውን OTP ያስገቡ">
+      </div>
+
+      <div class="form-group">
+        <label>የብሔራዊ መታወቂያ ፎቶ (ለአድሚን ብቻ የሚታይ)</label>
+        <input type="file" id="idCardPhoto" accept="image/*" required>
+      </div>
+      
+      <button type="button" class="btn" onclick="verifyOTP()" style="background-color: #28a745;">አረጋግጥ</button>
+    </div>
+
+    <!-- Step 2: Agent Verification Section (Hidden initially) -->
+    <div id="agentSection" class="agent-section hidden">
+      <h3>የኤጀንት ማረጋገጫ ገፅ</h3>
+      <p style="font-size: 12px; color: #666;">* ይህ ክፍል በኤጀንቱ በአካል ታይቶ የሚሞላ ነው</p>
+
+      <div class="form-group">
+        <label>የሚከራየው የቤት ዓይነት</label>
+        <select id="houseType">
+          <option value="አፓርታማ">አፓርታማ</option>
+          <option value="ቪላ">ቪላ</option>
+          <option value="ኮንዶሚኒየም">ኮንዶሚኒየም</option>
+          <option value="የግቢ ቤት">የግቢ ቤት</option>
+          <option value="ሰርቪስ">ሰርቪስ</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>የክፍል ብዛት</label>
+        <input type="number" id="roomCount" placeholder="ምሳሌ፡ 2" min="1">
+      </div>
+
+      <div class="form-group">
+        <label>ወርሃዊ ኪራይ (በብር)</label>
+        <input type="number" id="monthlyRent" placeholder="ምሳሌ፡ 15000">
+      </div>
+
+      <button type="submit" class="btn" style="background-color: #6f42c1;">መረጃውን መዝግብ</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  const tg = window.Telegram.WebApp;
+  tg.expand();
+
+  function sendOTP() {
+    const phone = document.getElementById('phone').value;
+    const fayda = document.getElementById('faydaNo').value;
+
+    if (!phone || !fayda) {
+      alert("እባክዎን ስልክ ቁጥር እና የፋይዳ ቁጥር ያስገቡ!");
+      return;
+    }
+
+    // OTP ማስገቢያውን እና የመታወቂያ መስቀያውን ማሳየት
+    document.getElementById('otpSection').classList.remove('hidden');
+    alert("የማረጋገጫ OTP ወደ " + phone + " ተልኳል!");
+  }
+
+  function verifyOTP() {
+    const otp = document.getElementById('otpInput').value;
+    if (otp === "") {
+      alert("እባክዎን የተላከውን OTP ያስገቡ!");
+      return;
+    }
+
+    alert("OTP በትክክል ተረጋግጧል!");
+    // ኤጀንቱ የሚሞላውን ክፍል ማሳየት
+    document.getElementById('agentSection').classList.remove('hidden');
+  }
+
+  document.getElementById('landlordForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = {
+      fullName: document.getElementById('fullName').value,
+      city: document.getElementById('city').value,
+      subcity: document.getElementById('subcity').value,
+      woreda: document.getElementById('woreda').value,
+      location: document.getElementById('location').value,
+      phone: document.getElementById('phone').value,
+      faydaNo: document.getElementById('faydaNo').value,
+      houseType: document.getElementById('houseType').value,
+      roomCount: document.getElementById('roomCount').value,
+      monthlyRent: document.getElementById('monthlyRent').value
+    };
+
+    // መረጃውን ወደ Telegram Bot መላክ
+    tg.sendData(JSON.stringify(formData));
+    tg.close();
+  });
+</script>
+
 </body>
 </html>
