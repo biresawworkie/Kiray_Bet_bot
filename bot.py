@@ -3,8 +3,7 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppI
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
 
 # ከBotFather የተቀበልከው ትክክለኛ ቶክን
-TOKEN = "8999460289:AAECE2JImjz61q_sOUMtJpQnCB8qa34icG8"
-
+TOKEN = 8999460289:AAEPnNSotffmjsoVQ-N_ouq-h0yemaxJaZU
 # የዌብ አፕሊኬሽን ሊንክ (GitHub Pages ሊንክህን ከዚህ በታች ታስገባዋለህ)
 WEB_APP_URL = "https://biresawworkie.github.io/Kiray_Bet_bot/" 
 
