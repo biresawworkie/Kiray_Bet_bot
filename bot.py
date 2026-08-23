@@ -8,9 +8,8 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=logging.INFO
 )
-
 TOKEN = "8999460289:AAEPnNSotffmjsoVQ-N_ouq-h0yemaxJaZU"
-WEB_APP_URL = "https://kiray-bet-bot.onrender.com"
+WEB_APP_URL = "https://biresawworkie.github.io/Kiray_Bet_bot/"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     keyboard = [
