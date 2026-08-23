@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiray Bet Mini App</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    body { font-family: sans-serif; background: #f4f6f8; margin: 0; padding: 15px; }
+    .card { background: white; border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    .wallet-grid { display: flex; gap: 10px; margin-bottom: 15px; }
+    .btn-wallet { flex: 1; padding: 15px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; }
+    .btn-recharge { background: #ffebee; color: #c62828; }
+    .btn-withdraw { background: #e8f5e9; color: #2e7d32; }
+    .house-item { border-bottom: 1px solid #eee; padding: 10px 0; }
+  </style>
+</head>
+<body>
+  <div class="wallet-grid">
+    <button class="btn-wallet btn-recharge">📥 Recharge</button>
+    <button class="btn-wallet btn-withdraw">📤 Withdraw</button>
+  </div>
+  <div id="role-view" class="card">
+    <h3>የቤቶች ዝርዝር</h3>
+    <div class="house-item">
+      <strong>አዲስ አበባ | አራዳ ክፍለ ከተማ</strong><br>
+      ዋጋ፡ 15,000 ብር/ወር | 2 ክፍል
+    </div>
+    <div class="house-item">
+      <strong>አዲስ አበባ | ቦሌ ክፍለ ከተማ</strong><br>
+      ዋጋ፡ 35,000 ብር/ወር | 3 ክፍል
+    </div>
+  </div>
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.expand();
+  </script>
+</body>
+</html>
